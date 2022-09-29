@@ -1,0 +1,156 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "projects",
+  "projects": {
+    "my-digital-library": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "changeDetection": "Default",
+          "style": "scss"
+        }
+      },
+      "root": "projects/my-digital-library",
+      "sourceRoot": "projects/my-digital-library/src",
+      "prefix": "anms",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist",
+            "index": "projects/my-digital-library/src/index.html",
+            "main": "projects/my-digital-library/src/main.ts",
+            "polyfills": "projects/my-digital-library/src/polyfills.ts",
+            "tsConfig": "projects/my-digital-library/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "projects/my-digital-library/src/favicon.ico",
+              "projects/my-digital-library/src/assets"
+            ],
+            "styles": [
+              "projects/my-digital-library/src/styles-app-loading.scss",
+              "projects/my-digital-library/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/my-digital-library/src/environments/environment.ts",
+                  "with": "projects/my-digital-library/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": true,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": true,
+              "commonChunk": true,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "bundle",
+                  "name": "polyfills",
+                  "baseline": "150kb",
+                  "maximumWarning": "50kb",
+                  "maximumError": "100kb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "styles",
+                  "baseline": "1mb",
+                  "maximumWarning": "2mb",
+                  "maximumError": "2mb"
+                },
+                {
+                  "type": "bundle",
+                  "name": "main",
+                  "baseline": "1024kb",
+                  "maximumWarning": "100kb",
+                  "maximumError": "200kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "my-digital-library:build"
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "my-digital-library:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "my-digital-library:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "projects/my-digital-library/src/test.ts",
+            "polyfills": "projects/my-digital-library/src/polyfills.ts",
+            "tsConfig": "projects/my-digital-library/tsconfig.spec.json",
+            "karmaConfig": "projects/my-digital-library/karma.conf.js",
+            "assets": [
+              "projects/my-digital-library/src/favicon.ico",
+              "projects/my-digital-library/src/assets"
+            ],
+            "styles": [
+              "projects/my-digital-library/src/styles-app-loading.scss",
+              "projects/my-digital-library/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "test": {
+              "fileReplacements": [
+                {
+                  "replace": "projects/my-digital-library/src/environments/environment.ts",
+                  "with": "projects/my-digital-library/src/environments/environment.test.ts"
+                }
+              ]
+            }
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "projects/my-digital-library/tsconfig.app.json",
+              "projects/my-digital-library/tsconfig.spec.json",
+              "projects/my-digital-library/e2e/tsconfig.json"
+            ],
+            "exclude": ["**/node_modules/**"]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "projects/my-digital-library/e2e/protractor.conf.js",
+            "devServerTarget": "my-digital-library:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "my-digital-library:serve:production"
+            }
+          }
+        }
+      }
+    }
+  },
+  "defaultProject": "my-digital-library",
+  "cli": {
+    "analytics": "b72350d3-1775-4f2f-9c70-871a81f7c3dc"
+  }
+}
